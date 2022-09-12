@@ -1,33 +1,27 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <stdlib.h>
+#include <sstream>
 using namespace std;
-string cleaned(string s1)
-{
-    string cl;
-    for (int i = 0;i < s1.length();i++)
-    {
-        if (s1[i] - '0' >= 0 && s1[i] - '0' <= 9)
-        {
-            cl += s1[i];
-        }
+struct Logger {
+    void logToScreen(){
+    
     }
-    return cl;
-}
+    void logToFile(const string& filename){
+
+    }
+};
 
 class Sumator {
 private:
     int sum_of_elems = 0;
 public:
     Sumator() {}
-    Sumator(string text) {
-        string st =  cleaned(text);
+    Sumator(int * st) {
         vector<int> output;
-        for (int i = 0; i < st.length(); i++) {
-            char c = st[i];
-            int temp = atoi(&c);
-            output.push_back(temp);
+        for (int i = 0; i < 5; i++) {
+            output.push_back(st[i]);
         }
         for (vector<int>::iterator it = output.begin(); it != output.end(); ++it)
             sum_of_elems += *it;
@@ -42,18 +36,14 @@ private:
     int sub_of_elems = 0;
 public:
     Subtructor() {}
-    Subtructor(string text) {
-        string st = cleaned(text);
+    Subtructor(int * st) {
         vector<int> output;
-        for (int i = 0; i < st.length(); i++) {
-            char c = st[i];
+        for (int i = 0; i < 6; i++) {
             if (i == 0) {
-                int temp = atoi(&c);
-                sub_of_elems = temp;
+                sub_of_elems = st[i];
             }
             else {
-                int temp = atoi(&c);
-                output.push_back(temp);
+                output.push_back(st[i]);
             }
         }
         for (vector<int>::iterator it = output.begin(); it != output.end(); ++it)
@@ -69,13 +59,10 @@ private:
     int mul_of_elems = 1;
 public:
     Multiplier() {}
-    Multiplier(string text) {
-        string st = cleaned(text);
+    Multiplier(int * st) {
         vector<int> output;
-        for (int i = 0; i < st.length(); i++) {
-            char c = st[i];
-            int temp = atoi(&c);
-            output.push_back(temp);
+        for (int i = 0; i < 6; i++) {
+            output.push_back(st[i]);
         }
         for (vector<int>::iterator it = output.begin(); it != output.end(); ++it)
             mul_of_elems *= *it;
@@ -90,18 +77,14 @@ private:
     int div_of_elems = 1;
 public:
     Divisior() {}
-    Divisior(string text) {
-        string st = cleaned(text);
+    Divisior(int * st) {
         vector<int> output;
-        for (int i = 0; i < st.length(); i++) {
-            char c = st[i];
+        for (int i = 0; i < 6; i++) {
             if (i == 0) {
-                int temp = atoi(&c);
-                div_of_elems = temp;
+                div_of_elems = st[i];
             }
             else {
-                int temp = atoi(&c);
-                output.push_back(temp);
+                output.push_back(st[i]);
             }
         }
         for (vector<int>::iterator it = output.begin(); it != output.end(); ++it)
@@ -114,9 +97,13 @@ public:
 };
 int main()
 {
-    string line = "8/2/2";
-    Divisior a (line);
-    a.printDiv(a);
+    string line = "20+2+2+2+2";
+    stringstream ss(line);
+    vector<int> v;
+    copy(istream_iterator<int>(ss), {}, back_inserter(v));
+    copy(begin(v), end(v), ostream_iterator<int>(cout, "+"));
+    int arr[5];
+    copy(v.begin(), v.end(), arr);
+    Sumator a (arr);
+    a.printSum(a);
 }
-
-
