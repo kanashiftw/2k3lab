@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <sstream>
 using namespace std;
-#define login(name) cout << "\n -->" << name<<'\n';
-#define logout(name) cout << "\n <--" << name<<'\n';
+
+#define login cout << "\n -->" << __FUNCTION__<<'\n';
+#define logout cout << "\n <--" << __FUNCTION__<<'\n';
 
 
 class Systematize {
@@ -14,7 +15,7 @@ private:
     vector<int> v;
 public:
     Systematize(string some_text) {
-        login("Systematize");
+        login;
         cout << endl;
         int k = 0;
         cout << "Операторы: ";
@@ -32,13 +33,19 @@ public:
         copy(istream_iterator<int>(ss), {}, back_inserter(v));
         copy(begin(v), end(v), ostream_iterator<int>(cout, " "));
         cout << endl;
-        logout("Systematize");
+        logout;
 }
     void priorities() {
 
     }
+    void setoperand(int pos, int value) {
+        login;
+        v[pos] = value;
+        cout << "\nОперанду на позиции " << pos << " было присвоено значение " << value<<endl;
+        logout;
+    }
     void calculate() {
-        login("calculate");
+        login;
         cout << endl;
         int k = 1;
         int tmp = v[0];
@@ -64,19 +71,20 @@ public:
         }
         cout << "Результат: " << tmp;
         cout << endl;
-        logout("calculate");
+        logout;
     }
 };
 
 int main()
 {
-    login("main");
+    login;
     cout << endl;
     setlocale(LC_ALL, "Russian");
     string line = "8-2/2+1";
-    logout("main");
+    logout;
     cout << endl;
     Systematize a(line);
+    a.setoperand(2, 4);
     a.calculate();
 }
 
