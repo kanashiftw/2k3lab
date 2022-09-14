@@ -1,17 +1,15 @@
-#include <iostream>
-#include <string>
-#include <vector>
 #include <stdlib.h>
 #include <sstream>
+#include <fstream>
 using namespace std;
 
-#define login cout << "\n -->" << __FUNCTION__<<'\n';
-#define logout cout << "\n <--" << __FUNCTION__<<'\n';
+#define login  cout << "\n -->" << __FUNCTION__<<'\n';
 
+#define logout cout << "\n <--" << __FUNCTION__<<'\n';
 
 class Systematize {
 private:
-    char c[6];
+    char c[100];
     vector<int> v;
 public:
     Systematize(string some_text) {
@@ -40,7 +38,7 @@ public:
     }
     void setoperand(int pos, int value) {
         login;
-        v[pos] = value;
+        v[pos-1] = value;
         cout << "\nОперанду на позиции " << pos << " было присвоено значение " << value<<endl;
         logout;
     }
@@ -73,6 +71,11 @@ public:
         cout << endl;
         logout;
     }
+    ~Systematize() {
+        login;
+        cout << "Элемент класса был удален.";
+        logout;
+    }
 };
 
 int main()
@@ -80,11 +83,10 @@ int main()
     login;
     cout << endl;
     setlocale(LC_ALL, "Russian");
-    string line = "8-2/2+1";
+    string line = "10-2*2+1";
     logout;
     cout << endl;
     Systematize a(line);
     a.setoperand(2, 4);
     a.calculate();
 }
-
