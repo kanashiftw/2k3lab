@@ -80,7 +80,7 @@ public:
                 k++;
                 break;
             case'/':
-                cout << tmp << " - " << v[k] << " = ";
+                cout << tmp << " / " << v[k] << " = ";
                 tmp /= v[k];
                 cout<< tmp<<endl;
                 k++;
@@ -93,9 +93,9 @@ public:
         cout << "Элемент класса был удален." << endl;
     }
 };
-struct Log {
+class Log: public Expression{
 public:
-    void outlog(string log) {
+    void outlog(string& log) {
         cout << log;
     }
 };
