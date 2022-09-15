@@ -17,7 +17,6 @@ protected:
     vector<double> v;
 public:
     Expression(string some_text) {
-        login;
         int k = 0;
         cout << "Операторы: ";
         for (int i = 0; i < some_text.length(); i++) {
@@ -32,70 +31,74 @@ public:
         stringstream ss(some_text);
         cout << "Операнды: ";
         copy(istream_iterator<double>(ss), {}, back_inserter(v));
-        copy(begin(v), end(v), ostream_iterator<double>(cout, " "));
-        logout;
+        copy(begin(v), end(v), ostream_iterator<double>(cout, "   "));
+        cout<<endl;
     }
     void priorities() {
-        
+
     }
     void setoperand(int pos, double value) {
-        login;
-        v[pos-1] = value;
-        cout << "Операнду на позиции " << pos << " было присвоено значение " << value;
-        logout;
+        v[pos - 1] = value;
+        cout << "Операнду на позиции " << pos << " было присвоено значение " << value << endl;
     }
     void shuffleoperands() {
-        login;
-        cout << "Новый порядок операндов: ";
+        cout << "Новый порядок операндов: " << endl;
         random_device rd;
         mt19937 g(rd());
         shuffle(v.begin(), v.end(), g);
-        copy(v.begin(), v.end(), std::ostream_iterator<double>(std::cout, " "));
-        logout;
+        copy(v.begin(), v.end(), std::ostream_iterator<double>(std::cout, "   "));
+        cout << endl;
     }
     void shufflebetween2(int i, int j) {
-        login;
         v[i] += v[j];
         v[j] = v[i] - v[j];
         v[i] -= v[j];
         cout << "Операнду под индексом " << i << " было присвоено значение " << v[i] << endl;
         cout << "Операнду под индексом " << j << " было присвоено значение " << v[j] << endl;
-        logout;
     }
     void calculate() {
-        login;
         int k = 1;
         double tmp = v[0];
         for (int i = 0; c[i] != 0;i++) {
             switch (c[i]) {
-            case '+': 
+            case '+':
+                cout << tmp << " + " << v[k] << " = ";
                 tmp += v[k];
+                cout << tmp<<endl;
                 k++;
                 break;
-            case '-': 
+            case '-':
+                cout << tmp << " - " << v[k] << " = ";
                 tmp -= v[k];
+                cout << tmp<<endl;
                 k++;
                 break;
-            case'*': 
+            case'*':
+                cout << tmp << " * " << v[k] << " = ";
                 tmp *= v[k];
+                cout << tmp<<endl;
                 k++;
                 break;
-            case'/': 
+            case'/':
+                cout << tmp << " - " << v[k] << " = ";
                 tmp /= v[k];
-                k++;  
+                cout<< tmp<<endl;
+                k++;
                 break;
             }
         }
-        cout << "Результат: " << tmp;
-        logout;
+        cout << "Результат: " << tmp << endl;
     }
     ~Expression() {
-        login;
-        cout << "Элемент класса был удален.";
-        logout;
+        cout << "Элемент класса был удален." << endl;
     }
 };
-
+struct Log {
+public:
+    void outlog(string log) {
+        cout << log;
+    }
+};
 //Какие-то стремные классы
 
 /*class Sumator : public Expression {
@@ -138,11 +141,9 @@ public:
 
 int main()
 {
-    login;
     setlocale(LC_ALL, "Russian");
-    string line = "10-2*2+1";
-    logout;
-    Systematize a(line);
+    string line = "10-2*2+1*245-2.5+14-19/3";
+    Expression a(line);
     a.setoperand(2, 4);
     a.shuffleoperands();
     a.shufflebetween2(1, 2);
