@@ -10,18 +10,18 @@ using namespace std;
 #define login  cout << "\n -->" << __FUNCTION__<<'\n';
 
 #define logout cout << "\n <--" << __FUNCTION__<<'\n';
-
-class Systematize {
-private:
+//Класс, переводящий строку в более удобный формат
+class Expression {
+protected:
     char c[100];
-    vector<int> v;
+    vector<double> v;
 public:
-    Systematize(string some_text) {
+    Expression(string some_text) {
         login;
         int k = 0;
         cout << "Операторы: ";
         for (int i = 0; i < some_text.length(); i++) {
-            if (!isdigit(some_text[i])) {
+            if (!isdigit(some_text[i]) && (some_text[i] != '.')) {
                 c[k] = some_text[i];
                 cout << c[k];
                 some_text[i] = ' ';
@@ -31,14 +31,14 @@ public:
         cout << '\t';
         stringstream ss(some_text);
         cout << "Операнды: ";
-        copy(istream_iterator<int>(ss), {}, back_inserter(v));
-        copy(begin(v), end(v), ostream_iterator<int>(cout, " "));
+        copy(istream_iterator<double>(ss), {}, back_inserter(v));
+        copy(begin(v), end(v), ostream_iterator<double>(cout, " "));
         logout;
-}
+    }
     void priorities() {
         
     }
-    void setoperand(int pos, int value) {
+    void setoperand(int pos, double value) {
         login;
         v[pos-1] = value;
         cout << "Операнду на позиции " << pos << " было присвоено значение " << value;
@@ -50,7 +50,7 @@ public:
         random_device rd;
         mt19937 g(rd());
         shuffle(v.begin(), v.end(), g);
-        copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
+        copy(v.begin(), v.end(), std::ostream_iterator<double>(std::cout, " "));
         logout;
     }
     void shufflebetween2(int i, int j) {
@@ -59,13 +59,13 @@ public:
         v[j] = v[i] - v[j];
         v[i] -= v[j];
         cout << "Операнду под индексом " << i << " было присвоено значение " << v[i] << endl;
-        cout << "Операнду под индексом " << j << " было присвоено значение " << v[j] << endl;;
+        cout << "Операнду под индексом " << j << " было присвоено значение " << v[j] << endl;
         logout;
     }
     void calculate() {
         login;
         int k = 1;
-        int tmp = v[0];
+        double tmp = v[0];
         for (int i = 0; c[i] != 0;i++) {
             switch (c[i]) {
             case '+': 
@@ -89,12 +89,52 @@ public:
         cout << "Результат: " << tmp;
         logout;
     }
-    ~Systematize() {
+    ~Expression() {
         login;
         cout << "Элемент класса был удален.";
         logout;
     }
 };
+
+//Какие-то стремные классы
+
+/*class Sumator : public Expression {
+public:
+    void calculate() {
+        double tmp = v[0];
+        for (int i = 0; v[i] != 0;i++) {
+            tmp += v[i];
+        }
+    }
+};
+class Substructor : public Expression {
+public:
+    void calculate() {
+        double tmp = v[0];
+        for (int i = 1; v[i] != 0;i++) {
+            tmp -= v[i];
+        }
+    }
+};
+class Multiplier : public Expression {
+public:
+    void calculate() {
+        double tmp = v[0];
+        for (int i = 1; v[i] != 0;i++) {
+            tmp *= v[i];
+        }
+    }
+};
+class Divisior : public Expression {
+public:
+    void calculate() {
+        double tmp = v[0];
+        for (int i = 1; v[i] != 0;i++) {
+            tmp /= v[i];
+        }
+    }
+};*/
+
 
 int main()
 {
