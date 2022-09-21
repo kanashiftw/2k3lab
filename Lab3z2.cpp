@@ -15,7 +15,6 @@ public:
     virtual void displayShop() = 0;
     virtual void seriallize(const std::string filename) = 0;
     virtual void deseriallize(const std::string filename) = 0;
-	virtual void vectoradd() = 0;
 };
 //КЛАСС МАГАЗИН
 class Shop : public IShopFunc
