@@ -18,6 +18,9 @@ class Expression : public ILoggable{
 public:
     char c[100];
     vector<double> v;
+    Expression() {
+        v[20];
+    }
     Expression(string some_text) {
         int k = 0;
         cout << "Операторы: ";
@@ -38,7 +41,7 @@ public:
     ~Expression() {
         cout << "Элемент класса был удален." << endl;
     }
-    void setoperand(int pos, double value) {
+    void setOperand(int pos, double value) {
         v[pos - 1] = value;
         cout << "Операнду на позиции " << pos << " было присвоено значение " << value << endl;
     }
@@ -56,6 +59,17 @@ public:
         v[i] -= v[j];
         cout << "Операнду под индексом " << i << " было присвоено значение " << v[i] << endl;
         cout << "Операнду под индексом " << j << " было присвоено значение " << v[j] << endl;
+    }
+    void setOperands(double * new_operands, int size) {
+            cout << "Новый порядок операндов: " << endl;
+        for (int i = 0; i < v.size(); i++) {
+            if (i < size) {
+                v[i] = new_operands[i];
+                cout << v[i] << ' ';
+            }
+            else  cout << v[i] << ' '; 
+        }
+        cout << endl;
     }
     virtual void calculate() override {
         int k = 1;
@@ -116,8 +130,11 @@ int main()
     setlocale(LC_ALL, "Russian");
     string line = "10-2*2+1*245-2.5+14-19/3";
     Expression a(line);
-    a.setoperand(2, 4);
+    a.setOperand(2, 4);
     a.shuffleoperands();
     a.shufflebetween2(1, 2);
+    double array[3] = { 1,2,3};
+    a.setOperands(array, 3);
     a.calculate();
 }
+
