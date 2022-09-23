@@ -5,6 +5,7 @@
 #include <fstream>
 #include <Windows.h>
 #include <string>
+#include <typeinfo>
 using namespace std;//Бяка
 
 //ИНТЕРФЕЙС МАГАЗИНА
