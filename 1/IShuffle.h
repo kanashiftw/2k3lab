@@ -1,6 +1,7 @@
 #pragma once
-class IShuffle {
+#include "IExpression.h"
+class IShuffle : public IExpression {
 public:
     virtual void shuffleOperands() = 0;
-    virtual void shufflebetween2(int i, int j) = 0;
+    virtual void shuffleOperands(int i, int j) = 0;
 };

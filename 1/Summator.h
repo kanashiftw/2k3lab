@@ -15,7 +15,7 @@ public:
     Summator(int n);
     ~Summator();
     virtual void shuffleOperands() override;
-    virtual void shufflebetween2(int i, int j) override;
+    virtual void shuffleOperands(int i, int j) override;
     virtual void setOperand(double value, size_t pos)override;
     virtual void setOperands(double* new_operands, size_t size)override;
     virtual void displayOperation()override;

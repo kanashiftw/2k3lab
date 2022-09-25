@@ -38,11 +38,11 @@ int main()
     vector_of_pointers.push_back(&div_test);
     for (int i = 0; i < vector_of_pointers.size();i++) {
         IShuffle* p = dynamic_cast<IShuffle*>(vector_of_pointers[i]);
-        cout << "\n\nРезультат приведения dynamic_cast для Expression:" << endl;
+        cout << "\n\nРезультат приведения dynamic_cast:" << endl;
         if (p) {
-            cout << "\tПриведение корректно.\nБазовый класс: " << typeid(p).name() <<
-                "\nПолученный класс: " << typeid(vector_of_pointers[i]).name();
+            cout << "\tПриведение корректно.\nБазовый класс: " << typeid(p).name();
             vector_of_pointers[i]->shuffleOperands();
+            vector_of_pointers[i]->calculate();
         }
         else cout << "\tПриведение некорректно." << endl;
     }

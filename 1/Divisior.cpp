@@ -32,19 +32,32 @@ void Divisior::setOperand(double value, size_t pos) {
     cout << "Операнду на позиции " << pos << " было присвоено значение " << value << endl;
 }
 void Divisior::shuffleOperands() {
-    cout << "\nНовый порядок операндов: " << endl;
-    random_device rd;
-    mt19937 g(rd());
-    shuffle(v.begin(), v.end(), g);
-    copy(v.begin(), v.end(), std::ostream_iterator<double>(std::cout, "   "));
-    cout << endl;
+    cout << "\nНовый порядок операндов:" << endl;
+    partition(v.begin(), v.end(), [](int i)->bool {
+        return i < 0;
+        });
+    int k = 0;
+    for (auto it : v) {
+        if (k < n - 1) {
+            if (it < 0) cout << '(' << it << ')' << " / ";
+            else cout << it << " / ";
+            k++;
+        }
+        else {
+            if (it < 0) cout << '(' << it << ')';
+            else cout << it;
+            k++;
+        }
+    }
 }
-void Divisior::shufflebetween2(int i, int j) {
-    v[i] += v[j];
-    v[j] = v[i] - v[j];
-    v[i] -= v[j];
-    cout << "Операнду под индексом " << i << " было присвоено значение " << v[i] << endl;
-    cout << "Операнду под индексом " << j << " было присвоено значение " << v[j] << endl;
+void Divisior::shuffleOperands(int i, int j){
+    if (v[i] < 0 && v[j] >= 0) {
+        v[i] += v[j];
+        v[j] = v[i] - v[j];
+        v[i] -= v[j];
+        cout << "Операнду под индексом " << i << " было присвоено значение " << v[i] << endl;
+        cout << "Операнду под индексом " << j << " было присвоено значение " << v[j] << endl;
+    }
 }
 void Divisior::setOperands(double* new_operands, size_t size) {
     for (int i = 0; i < v.size(); i++) {
