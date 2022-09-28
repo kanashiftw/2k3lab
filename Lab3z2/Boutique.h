@@ -1,19 +1,20 @@
 #pragma once
 #include "IPayTax.h"
 #include "IShopFunc.h"
-#include <string>
+#include "Time.h"
 class  Boutique : public IShopFunc, public IPayTax
 {
 private:
-    std::string m_title;//Название рынка
+    std::string m_title;
     int m_year;
-    int m_workinHours;//Количество посетителей в день
-    int  m_income;//Средний чек
+    Time m_start;
+    Time m_end;
+    int  m_income;
 public:
     //КОНСТРУКТОР
     Boutique();
     //КОНСТРУКТОР С ПАРАМЕТРАМИ
-    Boutique(std::string _title, int _year, int  _workinHours, int _income);
+    Boutique(std::string _title, int _year, Time _start, Time _end, int _income);
     //ВИРТУАЛЬНЫЙ ДЕСТРУКТОР
     ~Boutique();
     virtual void setter()override;

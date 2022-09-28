@@ -16,13 +16,16 @@ int main()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    Shop shop_test("Пятерочка", 1998, 88005555505, 178000000000, TRUE);
+    Address adress("Арбат", 24);
+    Shop shop_test("Пятерочка", 1998,adress, 88005555505, 178000000000, TRUE);
     shop_test.displayShop();
     shop_test.seriallize("file.txt");
     Pharmacy pharmacy_test("Ромашка", 1997, 2300, 13900, TRUE);;
     pharmacy_test.displayShop();
     pharmacy_test.seriallize("file.txt");
-    Boutique boutique_test("Олег",1920, 12, 310020);
+    Time st(11, 30);
+    Time end(23, 30);
+    Boutique boutique_test("Олег",1920,st ,end, 310020);
     boutique_test.displayShop();
     //RTTI
     Boutique* a = new Boutique;

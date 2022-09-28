@@ -1,7 +1,6 @@
 #pragma once
 #include "IPayTax.h"
 #include "IShopFunc.h"
-#include <string>
 class Pharmacy : public IShopFunc, public IPayTax
 {
 private:

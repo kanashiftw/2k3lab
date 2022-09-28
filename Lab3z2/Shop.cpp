@@ -5,9 +5,10 @@
 #include <string>
 using namespace std;
 Shop::Shop() {}
-Shop::Shop(string _title, int _year, long long _number, long long _networth, bool _preorder) {
+Shop::Shop(string _title, int _year, Address _adr, long long _number, long long _networth, bool _preorder) {
     m_title = _title;
     m_year = _year;
+    m_adr = _adr;
     m_number = _number;
     m_networth = _networth;
     m_preorder = _preorder;
@@ -27,7 +28,7 @@ void Shop::setter(){
 
     cout << "Введите год: " << std::endl;
     cin >> m_year;
-
+    m_adr.setAddress();
     cout << "Введите номер: " << std::endl;
     cin >> m_number;
 
@@ -43,8 +44,9 @@ void Shop::setter(){
 void Shop::displayShop(){
     payTax();
     std::cout << "\nНазвание магазина: " << m_title << "\n"
-        << m_year << " года основания.\n"
-        << "Номер телефона: " << m_number << "\n"
+        << m_year << " года основания.\n";
+    m_adr.printAdress();
+        std::cout << "Номер телефона: " << m_number << "\n"
         << "Суммарная прибыль: " << m_networth << " руб." << "\n"
         << "Предзаказ ";
     if (m_preorder) cout << "возможен" << endl;
@@ -54,7 +56,7 @@ void Shop::displayShop(){
 void Shop::seriallize(const std::string filename){
     std::ofstream fout;
     fout.open(filename);
-    fout << m_title << "\n" << m_year << "\n" << m_number << "\n" << m_networth;
+    fout << m_title << "\n" << m_year << "\n\n" << m_number << "\n" << m_networth;
     fout.close();
 }
 //ЧТЕНИЕ ОБЪЕКТА ИЗ ФАЙЛА

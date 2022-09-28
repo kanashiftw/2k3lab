@@ -5,10 +5,11 @@
 #include <string>
 using namespace std;
 Boutique::Boutique() {};
-Boutique::Boutique(string _title,int _year, int  _workinHours, int _income) {
+Boutique::Boutique(string _title,int _year, Time  _start, Time _end, int _income) {
     m_title = _title;
     m_year = _year;
-    m_workinHours = _workinHours;
+    m_start = _start;
+    m_end = _end;
     m_income = _income;
 }
 Boutique::~Boutique() {} //Деструктор
@@ -28,8 +29,8 @@ void Boutique::setter(){
     cout << "Введите год основания: " << endl;
     cin >> m_year;
 
-    cout << "Введите часы работы" << endl;
-    cin >> m_workinHours;
+    m_start.setTime();
+    m_end.setTime();
     
     cout << "Введите заработок за месяц: " << endl;
     cin >> m_income;
@@ -39,20 +40,20 @@ void Boutique::setter(){
 void Boutique::displayShop(){
     payTax();
     cout << "\nНазвание Бутика: " << m_title <<'\n'<< m_year<<" года основания."
-        << "\nЧасы работы: " << m_workinHours << " часов в день\n"<<"Доход: "<<m_income <<" руб."<<endl;
+        << "\nЧасы работы: " << m_start.printWorkHours(m_start, m_end) << "\n" << "Доход: " << m_income << " руб." << endl;
 }
 //ЗАПИСЬ ОБЪЕКТА В ФАЙЛ
 void Boutique::seriallize(const std::string filename){
     std::ofstream fout;
     fout.open(filename);
-    fout << m_title << "\n" << m_year << "\n" << m_workinHours << "\n"<<m_income;
+    fout << m_title << "\n" << m_year << "\n" << m_start.printWorkHours(m_start, m_end) << "\n"<<m_income;
     fout.close();
 }
 //ЧТЕНИЕ ОБЪЕКТА ИЗ ФАЙЛА
 void Boutique::deseriallize(const std::string filename){
     std::ifstream fin;
     fin.open(filename);
-    fin >> m_title >> m_year >> m_workinHours>>m_income;
+    fin >> m_title >> m_year >> m_income;
     fin.close();
 }
 void Boutique::payTax() {
